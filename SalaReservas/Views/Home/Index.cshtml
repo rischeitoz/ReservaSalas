@@ -1,0 +1,78 @@
+@{ Layout = "_Layout"; }
+
+<div id="app" class="kiosk free">
+  <section class="main-panel">
+    <header class="topbar">
+      <div class="room-name">@ViewBag.RoomName</div>
+      <div class="clock">
+        <div id="time" class="time">--:--</div>
+        <div id="date" class="date">&nbsp;</div>
+      </div>
+    </header>
+
+    <div class="status-block">
+      <div id="statusLabel" class="status-label">LIBRE</div>
+      <div id="statusSub" class="status-sub">&nbsp;</div>
+    </div>
+
+    <div id="currentCard" class="current-card d-none">
+      <div class="small-label">Reunión actual</div>
+      <div id="curTitle" class="cur-title"></div>
+      <div id="curTime" class="cur-time"></div>
+      <div id="curOrg" class="cur-org"></div>
+    </div>
+
+    <div id="errorBar" class="error-bar d-none"></div>
+
+    <button id="btnBook" class="btn btn-light btn-xl" type="button">Reservar ahora</button>
+  </section>
+
+  <aside class="side-panel">
+    <h2>Próximas reuniones</h2>
+    <ul id="upcoming" class="upcoming"></ul>
+    <div id="noUpcoming" class="no-upcoming">No hay más reuniones hoy</div>
+    <div class="updated">Actualizado: <span id="updated">--</span></div>
+  </aside>
+</div>
+
+<!-- Modal de reserva -->
+<div class="modal fade" id="bookModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content book-modal">
+      <div class="modal-header">
+        <h3 class="modal-title">Nueva reserva</h3>
+        <button type="button" class="btn-close btn-close-lg" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label" for="title">Título de la reunión</label>
+          <input id="title" class="form-control form-control-lg" maxlength="120" placeholder="Ej. Reunión de equipo" autocomplete="off">
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="organizer">Tu nombre</label>
+          <input id="organizer" class="form-control form-control-lg" maxlength="80" placeholder="Opcional" autocomplete="off">
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="startSel">Hora de inicio</label>
+          <select id="startSel" class="form-select form-select-lg"></select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Duración</label>
+          <div id="durations" class="d-flex flex-wrap gap-2"></div>
+        </div>
+        <div id="bookMsg" class="alert d-none" role="alert"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary btn-lg" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" id="btnConfirm" class="btn btn-success btn-lg px-5">Confirmar reserva</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+@section Scripts {
+  <script>
+    window.ROOM_CFG = { min: @ViewBag.Min, max: @ViewBag.Max, workStart: "@ViewBag.WorkStart", workEnd: "@ViewBag.WorkEnd" };
+  </script>
+  <script src="~/js/room.js" asp-append-version="true"></script>
+}

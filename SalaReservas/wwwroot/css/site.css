@@ -1,0 +1,52 @@
+:root { --free: #1e9e57; --busy: #d93636; --ink: #fff; }
+html, body { height: 100%; margin: 0; overflow: hidden; background: #0f1720; color: var(--ink);
+  font-family: "Segoe UI", system-ui, sans-serif; -webkit-user-select: none; user-select: none; touch-action: manipulation; }
+
+.kiosk { display: grid; grid-template-columns: 1fr 380px; height: 100vh; transition: background .4s; }
+.kiosk.free .main-panel { background: linear-gradient(160deg, #23b36a, #167a43); }
+.kiosk.busy .main-panel { background: linear-gradient(160deg, #e84a4a, #a82424); }
+
+.main-panel { display: flex; flex-direction: column; padding: 2rem 2.5rem; min-width: 0; }
+.topbar { display: flex; justify-content: space-between; align-items: flex-start; }
+.room-name { font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 600; }
+.clock { text-align: right; }
+.time { font-size: clamp(2.6rem, 6vw, 4.5rem); font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }
+.date { font-size: 1.2rem; opacity: .9; text-transform: capitalize; }
+
+.status-block { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+.status-label { font-size: clamp(5rem, 15vw, 11rem); font-weight: 800; letter-spacing: .04em; line-height: 1; }
+.status-sub { font-size: clamp(1.4rem, 2.6vw, 2.2rem); opacity: .95; margin-top: .5rem; }
+
+.current-card { background: rgba(0,0,0,.22); border-radius: 18px; padding: 1.2rem 1.6rem; margin-bottom: 1.2rem; }
+.small-label { text-transform: uppercase; letter-spacing: .1em; font-size: .85rem; opacity: .85; }
+.cur-title { font-size: 2rem; font-weight: 700; overflow-wrap: anywhere; }
+.cur-time { font-size: 1.5rem; font-variant-numeric: tabular-nums; }
+.cur-org { opacity: .9; }
+
+.error-bar { background: rgba(0,0,0,.35); border-radius: 12px; padding: .7rem 1rem; margin-bottom: 1rem; }
+
+.btn-xl { font-size: 1.8rem; font-weight: 700; padding: 1.1rem 2rem; border-radius: 18px; min-height: 84px; }
+.kiosk.free .btn-xl { color: #167a43; }
+.kiosk.busy .btn-xl { color: #a82424; }
+
+.side-panel { background: #17212c; padding: 1.8rem 1.4rem; display: flex; flex-direction: column; overflow: hidden; }
+.side-panel h2 { font-size: 1.3rem; text-transform: uppercase; letter-spacing: .08em; opacity: .8; margin-bottom: 1rem; }
+.upcoming { list-style: none; padding: 0; margin: 0; overflow-y: auto; flex: 1; }
+.upcoming li { background: #223142; border-left: 6px solid #3b82f6; border-radius: 12px; padding: .8rem 1rem; margin-bottom: .8rem; }
+.upcoming .u-time { font-size: 1.35rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.upcoming .u-title { font-size: 1.1rem; overflow-wrap: anywhere; }
+.upcoming .u-org { font-size: .9rem; opacity: .7; }
+.no-upcoming { opacity: .6; font-size: 1.1rem; }
+.updated { font-size: .8rem; opacity: .5; margin-top: .8rem; }
+
+/* Modal táctil */
+.book-modal { color: #212529; border-radius: 20px; user-select: text; -webkit-user-select: text; }
+.book-modal .form-label { font-weight: 600; font-size: 1.1rem; }
+.btn-dur { min-width: 110px; min-height: 64px; font-size: 1.2rem; border-radius: 14px; }
+.btn-close-lg { transform: scale(1.5); }
+.book-modal .btn-lg { min-height: 64px; font-size: 1.25rem; border-radius: 14px; }
+
+@media (max-width: 900px) {
+  .kiosk { grid-template-columns: 1fr; grid-template-rows: 1fr 240px; }
+  .side-panel { padding: 1rem; }
+}
